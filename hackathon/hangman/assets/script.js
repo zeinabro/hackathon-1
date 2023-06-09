@@ -30,7 +30,24 @@ const checkLetter = (letter,word) => {
             correct=true
         } 
     }
+    if (correct==false){
+        getHangmanImage(correct) 
+    }
     return correct
+}
+
+const getHangmanImage = (correct) => {
+    hangManImage.textContent=""
+    console.log(chances)
+    if (chances>0){
+        chances-=1
+        console.log(chances)
+        let img = document.createElement('img')
+        img.src=`./hangman-${10-chances}.png`
+        hangManImage.appendChild(img)
+    } else {
+        alert('game over')
+    }
 }
 
 const displayWord = (word) => {
@@ -71,6 +88,10 @@ const hiddenWord = document.querySelector(".hiddenWord")
 
 const alphabetSection = document.querySelector(".alphabet")
 const alphabetList = document.querySelector(".alphabet ul")
+
+const hangManImage =  document.querySelector(".hangman")
+
+let chances = 10
 
 randomWordButton.addEventListener("click", getRandomWord)
 

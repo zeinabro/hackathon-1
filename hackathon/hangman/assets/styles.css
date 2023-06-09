@@ -24,3 +24,8 @@ button{
 .incorrect:disabled{
     background-color: #CD5C5C;
 }
+
+.hangman img{
+    width:250px;
+    padding: 20px;
+}
