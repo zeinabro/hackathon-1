@@ -10,28 +10,27 @@ const displayAlphabet = async (word) => {
         letterButton.addEventListener("click", () => {
             let correct = checkLetter(letter,word)
             if (correct==true){
-                //letterButton.disabled = true
-                alert("correct")
+                letterButton.disabled = true
+                // alert("correct")
             } else {
                 letterButton.disabled = true
-                alert ("incorrect")
+                // alert ("incorrect")
             }
         })
     }
 }
 
 const checkLetter = (letter,word) => {
-    let blankWord=document.querySelector('.hiddenWord p')
+    let correct=false
     word = word.toLowerCase()
     letter =  letter.toLowerCase()
-    console.log(letter)
-    let idx=word.search(letter)
-    if (idx!==-1){                 
-        blankWord.textContent[idx]=letter.toUpperCase()
-        return true
-    } else {
-        return false
+    for (let i=0;i<word.length;i++){
+        if (word[i]==letter){
+            hiddenWord.childNodes[i].textContent=letter
+            correct=true
+        } 
     }
+    return correct
 }
 
 const displayWord = (word) => {
@@ -55,6 +54,7 @@ const getRandomWord = async () => {
             const word = await resp.json()
             displayWord(word[0])
             displayAlphabet(word[0])
+            console.log(word[0])
             return word[0]
         } else {
             throw "Error: http status code = " + resp.status
@@ -67,8 +67,7 @@ const getRandomWord = async () => {
 
 const randomWordButton = document.querySelector("#randomWord")
 
-const hiddenWordSection = document.querySelector(".hiddenWord")
-const hiddenWord = document.querySelector(".hiddenWord p")
+const hiddenWord = document.querySelector(".hiddenWord")
 
 const alphabetSection = document.querySelector(".alphabet")
 const alphabetList = document.querySelector(".alphabet ul")
