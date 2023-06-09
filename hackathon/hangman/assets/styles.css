@@ -16,3 +16,11 @@ body{
 button{
     font-size: 20px;
 }
+
+.correct:disabled{
+    background-color: #3CB371;
+}
+
+.incorrect:disabled{
+    background-color: #CD5C5C;
+}

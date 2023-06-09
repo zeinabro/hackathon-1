@@ -11,10 +11,10 @@ const displayAlphabet = async (word) => {
             let correct = checkLetter(letter,word)
             if (correct==true){
                 letterButton.disabled = true
-                // alert("correct")
+                letterButton.className = "correct"
             } else {
                 letterButton.disabled = true
-                // alert ("incorrect")
+                letterButton.className = "incorrect"
             }
         })
     }
