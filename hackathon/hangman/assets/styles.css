@@ -1,3 +1,14 @@
 body{
     background-color: plum;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hiddenWord p{
+    display: inline;
+    font-size: 40px;
+}
+
+#randomWord {
+    font-size: 20px;
 }
