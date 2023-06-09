@@ -6,23 +6,33 @@ const displayAlphabet = () => {
         const letterButton = document.createElement('BUTTON')
         letterButton.textContent = letter
         alphabetList.appendChild(letterButton)
+        letterButton.addEventListener("click",checkLetter)
     }
 }
 
+const checkLetter = () => {
+    //check if letter clicked is in word
+    //if yes, show letter
+    //if no
+}
+
 const displayWord = (word) => {
+    console.log(word)
     for (let i=0;i<word.length;i++){
         const letter = word[i]
-        const blankLetter = document.createElement('p')
+        const blankWord = document.createElement('p')
         if (i!==word.length){
-            blankLetter.textContent += "_ "
+            blankWord.textContent += "_ "
         } else {
-            blankLetter.textContent += "_"
+            blankWord.textContent += "_"
         }
-        hiddenWordList.appendChild(blankLetter)
+        hiddenWordList.appendChild(blankWord)
+        //console.log(blankWord.textContent[0])
     }
 }
 
 const getRandomWord = async () => {
+    hiddenWordList.textContent=""
     try{
         const resp = await fetch("https://random-word-api.herokuapp.com/word")
         if (resp.ok) {
@@ -35,7 +45,6 @@ const getRandomWord = async () => {
         console.log(err)
         alert("Unable to generate random word")
     }
-
 }
 
 const randomWordButton = document.querySelector("#randomWord")
