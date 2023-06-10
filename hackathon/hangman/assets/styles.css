@@ -17,6 +17,10 @@ button{
     font-size: 20px;
 }
 
+button:disabled{
+    background-color: grey;
+}
+
 .correct:disabled{
     background-color: #3CB371;
 }
@@ -24,6 +28,8 @@ button{
 .incorrect:disabled{
     background-color: #CD5C5C;
 }
+
+
 
 .hangman img{
     width:250px;

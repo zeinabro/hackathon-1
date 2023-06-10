@@ -31,22 +31,23 @@ const checkLetter = (letter,word) => {
         } 
     }
     if (correct==false){
-        getHangmanImage(correct) 
+        getHangmanImage() 
     }
     return correct
 }
 
-const getHangmanImage = (correct) => {
+const getHangmanImage = () => {
     hangManImage.textContent=""
-    console.log(chances)
+    let img = document.createElement('img')
     if (chances>0){
         chances-=1
-        console.log(chances)
-        let img = document.createElement('img')
-        img.src=`./hangman-${10-chances}.png`
+        img.src=`./assets/hangmans/hangman-${chances}.png`
+        img.alt="hangman stick man image"
         hangManImage.appendChild(img)
     } else {
-        alert('game over')
+        alert('Game over')
+        //show full word - definition from dictionary api?
+        //display text
     }
 }
 
@@ -64,6 +65,7 @@ const displayWord = (word) => {
 }
 
 const getRandomWord = async () => {
+    chances=10
     hiddenWord.textContent=""
     try{
         const resp = await fetch("https://random-word-api.herokuapp.com/word")
@@ -71,7 +73,6 @@ const getRandomWord = async () => {
             const word = await resp.json()
             displayWord(word[0])
             displayAlphabet(word[0])
-            console.log(word[0])
             return word[0]
         } else {
             throw "Error: http status code = " + resp.status
@@ -89,7 +90,7 @@ const hiddenWord = document.querySelector(".hiddenWord")
 const alphabetSection = document.querySelector(".alphabet")
 const alphabetList = document.querySelector(".alphabet ul")
 
-const hangManImage =  document.querySelector(".hangman")
+const hangManImage =  document.querySelector(".hangman a")
 
 let chances = 10
 
