@@ -23,16 +23,22 @@ const displayAlphabet = async (word) => {
 const checkLetter = (letter,word) => {
     let correct=false
     word = word.toLowerCase()
-    letter =  letter.toLowerCase()
+    letter = letter.toLowerCase()
     for (let i=0;i<word.length;i++){
         if (word[i]==letter){
             hiddenWord.childNodes[i].textContent=letter
             correct=true
         } 
     }
+
     if (correct==false){
         getHangmanImage() 
     }
+
+    if (hiddenWord.textContent==word){
+        showResults(true)
+    }
+
     return correct
 }
 
@@ -45,9 +51,17 @@ const getHangmanImage = () => {
         img.alt="hangman stick man image"
         hangManImage.appendChild(img)
     } else {
-        alert('Game over')
+        showResults(false)
         //show full word - definition from dictionary api?
         //display text
+    }
+}
+
+const showResults = (win) => {
+    if (win==true){
+        alert('Correct')
+    } else {
+        alert ('Game Over')
     }
 }
 
@@ -67,10 +81,12 @@ const displayWord = (word) => {
 const getRandomWord = async () => {
     chances=10
     hiddenWord.textContent=""
+    hangManImage.textContent=""
     try{
         const resp = await fetch("https://random-word-api.herokuapp.com/word")
         if (resp.ok) {
             const word = await resp.json()
+            console.log(word[0])
             displayWord(word[0])
             displayAlphabet(word[0])
             return word[0]
